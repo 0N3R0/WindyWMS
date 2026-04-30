@@ -13,6 +13,11 @@ async function bootstrap() {
     defaultVersion: '1'
   });
 
+  app.enableCors({
+    origin: 'http://localhost:3001',
+    credentials: true,
+  });
+
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true
   }));
