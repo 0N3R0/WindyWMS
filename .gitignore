@@ -1,23 +1,26 @@
 # custom exclusions
-/data
+data/
 .vscode
 
+# --- Backend specific ---
 # compiled output
 dist/
 node_modules/
 build/
 
-# Logs
+# Logs & debug
 logs
 *.log
 npm-debug.log*
 pnpm-debug.log*
+.pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# OS
+# OS & misc
 .DS_Store
+*.pem
 
 # Tests
 coverage/
@@ -45,6 +48,7 @@ coverage/
 .env.test.local
 .env.production.local
 .env.local
+.env*
 
 # temp directory
 .temp
@@ -59,4 +63,27 @@ pids
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
+# Prisma
 generated/prisma/
+
+# --- frontend specific ---
+
+# dependencies (yarn/pnp)
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# next.js
+.next/
+out/
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
