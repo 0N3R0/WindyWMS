@@ -1,9 +1,5 @@
-import { LoginForm } from "@/features/auth/components/login-form";
+import { AuthCard } from "@/features/auth/components/auth-card";
 
 export default function LoginPage() {
-  return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-50">
-      <LoginForm />
-    </main>
-  );
+  return <AuthCard />;
 }
