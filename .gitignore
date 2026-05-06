@@ -1,5 +1,6 @@
 # custom exclusions
-data/
+agentData/
+agentData (old)
 .vscode
 
 # --- Backend specific ---
