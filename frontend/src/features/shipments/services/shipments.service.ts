@@ -1,7 +1,12 @@
 import { apiClient } from "@/shared/api/api-client";
-import { ShipmentDetails } from "../types/shipments.types";
+import { Shipment, ShipmentDetails } from "../types/shipments.types";
 
 export const shipmentsService = {
+  async getAll(): Promise<Shipment[]> {
+    const response = await apiClient.get<Shipment[]>('/shipments');
+    return response.data;
+  },
+
   async getDetails(trackingNumber: string): Promise<ShipmentDetails> {
     const response = await apiClient.get<ShipmentDetails>(`/shipments/${trackingNumber}`);
     return response.data;

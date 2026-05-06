@@ -1,19 +1,23 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie';
 import { authService } from "../services/auth.service";
 import { AuthFormValues } from "../validators/auth.schema";
+import { useAuthContext } from "@/providers/auth-provider";
 
 export function useAuth() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { setIsAuthenticated } = useAuthContext();
 
   const login = async (data: AuthFormValues) => {
     try {
       setIsLoading(true);
       setError(null);
       const res = await authService.login(data);
-      localStorage.setItem("access_token", res.access_token);
+      Cookies.set("access_token", res.access_token, { expires: 7 }); // token wygasa po 7 dniach w cookie
+      setIsAuthenticated(true);
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.response?.data?.message || "Błąd logowania");
@@ -27,7 +31,8 @@ export function useAuth() {
       setIsLoading(true);
       setError(null);
       const res = await authService.register(data);
-      localStorage.setItem("access_token", res.access_token);
+      Cookies.set("access_token", res.access_token, { expires: 7 });
+      setIsAuthenticated(true);
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.response?.data?.message || "Błąd rejestracji");
@@ -37,7 +42,8 @@ export function useAuth() {
   };
 
   const logout = () => {
-    localStorage.removeItem("access_token");
+    Cookies.remove("access_token");
+    setIsAuthenticated(false);
     router.push("/login");
   };
 
