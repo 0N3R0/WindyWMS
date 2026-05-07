@@ -1,6 +1,6 @@
 export function AuthBackground() {
   return (
-    <div className="hidden lg:flex flex-1 items-center justify-center relative group/brand">
+    <div className="hidden lg:flex flex-1 items-center justify-center relative group/brand cursor-default select-none">
       {/* Siatka logistyczna — subtelny drift animation */}
       <div
         className="absolute inset-0 opacity-[0.04] animate-grid-drift"
