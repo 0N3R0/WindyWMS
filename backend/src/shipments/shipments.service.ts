@@ -41,11 +41,21 @@ export class ShipmentsService {
         trackingNumber: trackingNumber,
         userId: userId // Sprawdzamy czy paczka należy do użytkownika
       },
-      include: { // Dociągamy dane z tabeli z wydarzeniami
+      select: {
+        trackingNumber: true,
+        recipient: true,
+        weight: true,
+        status: true,
+        updatedAt: true,
         events: {
-          orderBy: { createdAt: 'desc' }
-        }
-      }
+          select: {
+            status: true,
+            description: true,
+            createdAt: true,
+          },
+          orderBy: { createdAt: 'desc' },
+        },
+      },
     });
 
     if (!shipment) {
