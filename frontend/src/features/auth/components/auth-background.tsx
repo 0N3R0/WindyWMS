@@ -41,7 +41,7 @@ export function AuthBackground() {
 
         <div>
           <h1 className="font-heading text-4xl font-bold text-white tracking-tight transition-colors duration-500 group-hover/brand:text-violet-100">
-            WindyWMS <span className="text-[1.2rem] text-violet-900 opacity-75">DEMO</span>
+            WindyWMS <span className="text-[1.2rem] transition-colors duration-500 text-violet-300/60 group-hover/brand:text-violet-300/80">DEMO</span>
           </h1>
           <p className="text-violet-300/60 mt-2 text-sm tracking-wide transition-colors duration-500 group-hover/brand:text-violet-300/80">
             System Zarządzania Magazynem
