@@ -3,9 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import useSWR from "swr";
 
-import { apiClient } from "@/shared/api/api-client";
-// import { MOCK_DETAILS } from "../__mocks__/shipments.mock";
-
 import { Shipment, ShipmentDetails, ShipmentStatus } from "../types/shipments.types";
 import { shipmentsService } from "../services/shipments.service";
 import { ShipmentTimeline } from "./shipment-timeline";
@@ -28,28 +25,19 @@ const statusConfig: Record<ShipmentStatus, { label: string; variant: "default" |
   CANCELLED: { label: "Anulowana", variant: "destructive" },
 };
 
-const fetcher = (url: string) => apiClient.get(url).then(res => res.data);
-// const mockFetcher = (url: string): Promise<any> => {
-//   const trackingNumber = url.split("/").pop()!;
-//   return new Promise((resolve) =>
-//     setTimeout(() => resolve(MOCK_DETAILS[trackingNumber]), 500)
-//   );
-// };
-
 export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isActioning, setIsActioning] = useState(false);
   const prevStatusRef = useRef(shipment.status);
 
-  // Pobieramy szczegóły TYLKO gdy panel jest rozwinięty (conditional fetching)
+  // Fetch details only when the panel is expanded (conditional fetching)
   const { data: details, mutate: refreshDetails } = useSWR<ShipmentDetails>(
     isOpen ? `/shipments/${shipment.trackingNumber}` : null,
-    fetcher,
-    // mockFetcher,
+    () => shipmentsService.getDetails(shipment.trackingNumber),
     {
-      dedupingInterval: 15_000,       // Nie refetchuj jeśli dane mają < 15s
-      revalidateOnFocus: false,       // Szczegóły nie muszą się odświeżać na focus
-      revalidateOnReconnect: false,   // Ani przy reconnect
+      dedupingInterval: 15_000,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
       keepPreviousData: true
     }
   );
