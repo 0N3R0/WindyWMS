@@ -15,8 +15,6 @@ export interface ShipmentEvent {
 }
 
 export interface ShipmentDetails extends Shipment {
-  id: string;
   events: ShipmentEvent[];
-  createdAt: string;
   updatedAt: string;
 }

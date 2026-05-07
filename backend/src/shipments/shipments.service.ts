@@ -49,6 +49,7 @@ export class ShipmentsService {
         updatedAt: true,
         events: {
           select: {
+            id: true,
             status: true,
             description: true,
             createdAt: true,
