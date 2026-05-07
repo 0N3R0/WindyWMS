@@ -4,8 +4,7 @@ import { z } from "zod";
 export function createShipmentSchema(minWeight: number, maxWeight: number) {
   return z.object({
     recipient: z.string().min(1, { message: "Odbiorca jest wymagany." }),
-    weight: z
-      .number({ message: "Waga musi być liczbą." })
+    weight: z.number({ message: "Waga musi być liczbą." })
       .min(minWeight, { message: `Minimalna waga to ${minWeight} kg.` })
       .max(maxWeight, { message: `Maksymalna waga to ${maxWeight} kg.` }),
   });

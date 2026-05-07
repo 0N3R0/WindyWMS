@@ -24,6 +24,8 @@ export function CreateShipmentForm() {
   // Dynamiczny schemat — limity wagi z backendu, fallback na domyślne
   const minWeight = constants?.shipments.minWeight ?? 0.1;
   const maxWeight = constants?.shipments.maxWeight ?? 1000;
+  const [currentWeight, setCurrentWeight] = useState('');
+
   const schema = createShipmentSchema(minWeight, maxWeight);
 
   const form = useForm<CreateShipmentValues>({
@@ -42,9 +44,9 @@ export function CreateShipmentForm() {
       setSuccess(false);
       await shipmentsService.create(data);
       form.reset();
+      setCurrentWeight("");
       setSuccess(true);
-      refresh(); // Odśwież tabelę — nowa paczka się pojawi
-      // Ukryj komunikat sukcesu po 3 sekundach
+      refresh();
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: any) {
       setError(err.response?.data?.message || "Błąd tworzenia przesyłki");
@@ -54,8 +56,8 @@ export function CreateShipmentForm() {
   }
 
   return (
-    <Card className="shadow-sm border-slate-200 py-0">
-      <CardHeader className="bg-slate-50/50 border-b px-4 py-4">
+    <Card className="py-0">
+      <CardHeader className="px-4 py-4">
         <CardTitle className="flex items-center gap-2">
           <Plus className="h-5 w-5" />
           Nowa przesyłka
@@ -93,9 +95,21 @@ export function CreateShipmentForm() {
                       min={minWeight}
                       max={maxWeight}
                       placeholder={`${minWeight}`}
-                      {...field}
-                      value={field.value || ""}
-                      onChange={(e) => field.onChange(e.target.value ? parseFloat(e.target.value) : undefined)}
+                      name={field.name}
+                      ref={field.ref}
+                      onBlur={field.onBlur}
+                      value={currentWeight}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+
+                        // Walidacja formatu: max 2 miejsca po przecinku, bez wiodących zer
+                        if (raw !== "" && !/^\d*\.?\d{0,2}$/.test(raw)) return;
+                        if (raw.length > 1 && raw.startsWith("0") && !raw.startsWith("0.")) return;
+
+                        setCurrentWeight(raw);
+                        const parsed = parseFloat(raw);
+                        field.onChange(raw === "" ? undefined : isNaN(parsed) ? undefined : parsed);
+                      }}
                       disabled={isLoading}
                     />
                   </FormControl>

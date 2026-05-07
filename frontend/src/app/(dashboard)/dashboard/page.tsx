@@ -6,16 +6,16 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Panel Dyspozytora</h1>
-        <p className="text-muted-foreground mt-2">
+        <h1 className="text-3xl font-bold tracking-tight text-white">Panel Dyspozytora</h1>
+        <p className="text-white/40 mt-2">
           Zarządzaj statusem paczek i śledź ich drogę na żywo.
         </p>
       </div>
 
       <CreateShipmentForm />
 
-      <Card className="shadow-sm border-slate-200 py-0 gap-0">
-        <CardHeader className="bg-slate-50/50 border-b px-4 py-4">
+      <Card className="py-0 gap-0">
+        <CardHeader className="px-4 py-4">
           <CardTitle>Tabela Przesyłek</CardTitle>
           <CardDescription>Pełne zestawienie paczek aktualnie procesowanych w Twoim oddziale.</CardDescription>
         </CardHeader>

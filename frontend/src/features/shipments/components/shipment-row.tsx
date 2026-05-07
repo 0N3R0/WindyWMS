@@ -82,7 +82,7 @@ export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
     <div className="border-b last:border-b-0">
       {/* Wiersz danych — ten sam grid co nagłówek */}
       <div
-        className={`grid ${GRID_COLS} gap-4 px-4 py-3 cursor-pointer hover:bg-slate-50/80 transition-colors items-center`}
+        className={`grid ${GRID_COLS} gap-4 px-4 py-3 cursor-pointer hover:bg-white/5 transition-colors items-center text-white/90`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="font-medium font-mono text-sm truncate">
@@ -112,7 +112,7 @@ export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
         style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
       >
         <div className="overflow-hidden">
-          <div className="px-6 py-5 space-y-4 bg-slate-50/50 border-t">
+          <div className="px-6 py-5 space-y-4 bg-black/20 border-t border-white/8">
             {/* Sekcja: Oś czasu */}
             <div>
               <h4 className="text-sm font-semibold text-muted-foreground mb-3">

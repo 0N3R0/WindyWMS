@@ -34,16 +34,13 @@ export function ShipmentsTable() {
   }
 
   return (
-    <div className="rounded-md border overflow-hidden">
+    <div className="rounded-md border border-white/8 overflow-hidden bg-white/2">
       {/* Nagłówek — ten sam grid co wiersze */}
-      <div className={`grid ${GRID_COLS} gap-4 px-4 py-3 bg-slate-50 border-b`}>
-        <div className="text-sm font-semibold">Numer Trackingowy</div>
-        <div className="text-sm font-semibold">Odbiorca</div>
-        <div className="text-sm font-semibold text-right">Waga (kg)</div>
-        <div className="text-sm font-semibold text-right">Status</div>
-        <div className="flex justify-center">
-          <ChevronDown className="h-4 w-4 text-slate-950" />
-        </div>
+      <div className={`grid ${GRID_COLS} gap-4 px-4 py-3 bg-white/3 border-b border-white/8`}>
+        <div className="text-sm font-semibold text-white/70">Numer Trackingowy</div>
+        <div className="text-sm font-semibold text-white/70">Odbiorca</div>
+        <div className="text-sm font-semibold text-right text-white/70">Waga (kg)</div>
+        <div className="text-sm font-semibold text-right text-white/70">Status</div>
       </div>
 
       {/* Ciało — lista wierszy */}
