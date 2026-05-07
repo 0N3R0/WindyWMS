@@ -25,10 +25,10 @@ export function LoginForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(login)} className="space-y-5">
         <div className="space-y-2 text-center mb-6">
-          <h2 className="font-heading text-2xl font-bold text-white">
+          <h2 className="font-heading text-2xl font-bold text-violet-300">
             Witaj ponownie
           </h2>
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-violet-300/60">
             Wprowadź email i hasło do systemu WindyWMS
           </p>
         </div>
@@ -38,13 +38,13 @@ export function LoginForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-white/70">E-mail</FormLabel>
+              <FormLabel className="text-violet-300/60">E-mail</FormLabel>
               <FormControl>
                 <Input
                   placeholder="dyspozytor@wms.pl"
                   {...field}
                   disabled={isLoading}
-                  className="bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:border-violet-500/50 focus-visible:ring-violet-500/20"
+                  className="bg-white/5 border-white/10 text-violet-200 placeholder:text-violet-300/30 focus-visible:border-violet-500/50 focus-visible:ring-violet-500/20"
                 />
               </FormControl>
               <FormMessage />
@@ -57,7 +57,7 @@ export function LoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-white/70">Hasło</FormLabel>
+              <FormLabel className="text-violet-300/60">Hasło</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input
@@ -65,12 +65,12 @@ export function LoginForm() {
                     placeholder="••••••••"
                     {...field}
                     disabled={isLoading}
-                    className="bg-white/5 border-white/10 text-white placeholder:text-white/20 focus-visible:border-violet-500/50 focus-visible:ring-violet-500/20 pr-10"
+                    className="bg-white/5 border-white/10 text-violet-200 placeholder:text-violet-300/30 focus-visible:border-violet-500/50 focus-visible:ring-violet-500/20 pr-10"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-violet-300/60 hover:text-violet-300 transition-colors"
                   >
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>

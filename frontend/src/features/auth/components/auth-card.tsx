@@ -40,7 +40,7 @@ export function AuthCard() {
             onClick={() => handleSwitch(tab.id)}
             className={cn(
               "relative z-10 flex-1 py-2.5 text-center text-sm font-medium rounded-lg transition-colors duration-300",
-              tab.isMatch ? "text-violet-300" : "text-white/40 hover:text-white/60"
+              tab.isMatch ? "text-violet-400" : "text-violet-400/60 hover:text-violet-400 cursor-pointer"
             )}
           >
             {tab.label}

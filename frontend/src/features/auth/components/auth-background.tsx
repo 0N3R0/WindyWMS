@@ -32,18 +32,18 @@ export function AuthBackground() {
       <div className="relative z-10 text-center space-y-6 transition-transform duration-500 group-hover/brand:-translate-y-2">
         {/* Ikona — pulsująca obwódka + float */}
         <div className="mx-auto w-24 h-24 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center backdrop-blur-sm animate-pulse-ring transition-all duration-500 group-hover/brand:bg-violet-500/15 group-hover/brand:border-violet-500/35 group-hover/brand:scale-110 group-hover/brand:-translate-y-3">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-violet-400 transition-colors duration-500 group-hover/brand:text-violet-300">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-violet-300 transition-colors duration-500 group-hover/brand:text-violet-400">
             <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
             <path d="m3.3 7 8.7 5 8.7-5" />
             <path d="M12 22V12" />
           </svg>
         </div>
 
-        <div>
-          <h1 className="font-heading text-4xl font-bold text-white tracking-tight transition-colors duration-500 group-hover/brand:text-violet-100">
-            WindyWMS <span className="text-[1.2rem] transition-colors duration-500 text-violet-300/60 group-hover/brand:text-violet-300/80">DEMO</span>
+        <div className="text-violet-300">
+          <h1 className="font-heading text-4xl font-bold tracking-tight transition-colors duration-500 group-hover/brand:text-violet-400">
+            WindyWMS <span className="text-[1.2rem] text-violet-400">DEMO</span>
           </h1>
-          <p className="text-violet-300/60 mt-2 text-sm tracking-wide transition-colors duration-500 group-hover/brand:text-violet-300/80">
+          <p className="text-violet-300/60 mt-2 text-sm tracking-wide">
             System Zarządzania Magazynem
           </p>
         </div>
