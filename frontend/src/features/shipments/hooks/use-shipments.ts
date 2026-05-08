@@ -1,11 +1,11 @@
 import useSWR from 'swr';
-import { Shipment } from '../types/shipments.types';
+import { AllShipments } from '../types/shipments.types';
 import { shipmentsService } from '../services/shipments.service';
 
 const REFRESH_INTERVAL_MS = 15_000;
 
 export function useShipments() {
-  const { data, error, isLoading, mutate } = useSWR<Shipment[]>(
+  const { data, error, isLoading, mutate } = useSWR<AllShipments>(
     '/shipments',
     () => shipmentsService.getAll(),
     {
@@ -17,7 +17,7 @@ export function useShipments() {
   );
 
   return {
-    shipments: data || [],
+    shipments: data,
     isLoading,
     isError: error,
     refresh: mutate,

@@ -7,6 +7,18 @@ export interface Shipment {
   status: ShipmentStatus;
 }
 
+export interface ShipmentMetadata {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface AllShipments {
+  data: Shipment[];
+  meta: ShipmentMetadata;
+}
+
 export interface ShipmentEvent {
   id: string;
   status: ShipmentStatus;

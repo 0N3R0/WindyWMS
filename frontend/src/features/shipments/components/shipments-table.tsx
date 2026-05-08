@@ -24,7 +24,7 @@ export function ShipmentsTable() {
     return <div className="p-4 text-red-500 bg-red-50 rounded-md">Wystąpił błąd pobierania danych.</div>;
   }
 
-  if (shipments.length === 0) {
+  if (shipments?.data.length === 0) {
     return (
       <div className="flex flex-col h-48 items-center justify-center text-muted-foreground">
         <Package className="h-10 w-10 mb-4 opacity-20" />
@@ -45,7 +45,7 @@ export function ShipmentsTable() {
 
       {/* Ciało — lista wierszy */}
       <div>
-        {shipments.map((shipment) => (
+        {shipments?.data.map((shipment) => (
           <ShipmentRow
             key={shipment.trackingNumber}
             shipment={shipment}

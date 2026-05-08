@@ -2,6 +2,7 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
+import { APP_CONSTANTS } from 'src/app.constants';
 
 @Injectable()
 export class JwtGuard implements CanActivate {
@@ -18,7 +19,7 @@ export class JwtGuard implements CanActivate {
     const token = this.extractTokenFromHeader(request);
 
     if (!token) {
-      throw new UnauthorizedException('Brak tokenu autoryzacyjnego');
+      throw new UnauthorizedException(APP_CONSTANTS.auth.messages.errors.MISSING_TOKEN);
     }
 
     try {
@@ -31,7 +32,7 @@ export class JwtGuard implements CanActivate {
       // Dzięki temu w kontrolerze będziemy mogli napisać np. request.user.id
       request['user'] = payload;
     } catch {
-      throw new UnauthorizedException('Nieprawidłowy lub wygasły token');
+      throw new UnauthorizedException(APP_CONSTANTS.auth.messages.errors.INVALID_TOKEN);
     }
 
     // 5. Zwracamy true - pozwalamy na wykonanie żądania!

@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { AuthDto } from './dto/auth.dto';
 import { ConfigService } from '@nestjs/config';
-
+import { APP_CONSTANTS } from 'src/app.constants';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +20,7 @@ export class AuthService {
     const userExists = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
-    if (userExists) throw new BadRequestException('Ten e-mail jest już zajęty');
+    if (userExists) throw new BadRequestException(APP_CONSTANTS.auth.messages.errors.EMAIL_TAKEN);
 
     // 2. Hashujemy hasło
     const hashedPassword = await bcrypt.hash(dto.password, 10);
@@ -41,11 +41,11 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
-    if (!user) throw new UnauthorizedException('Błędne dane logowania');
+    if (!user) throw new UnauthorizedException(APP_CONSTANTS.auth.messages.errors.USER_NOT_FOUND);
 
     // 2. Porównujemy przysłane hasło z hashem w bazie
     const pwMatches = await bcrypt.compare(dto.password, user.password);
-    if (!pwMatches) throw new UnauthorizedException('Błędne dane logowania');
+    if (!pwMatches) throw new UnauthorizedException(APP_CONSTANTS.auth.messages.errors.INVALID_CREDENTIALS);
 
     // 3. Wystawiamy token JWT
     return this.signToken(user.id, user.email, user.role);
