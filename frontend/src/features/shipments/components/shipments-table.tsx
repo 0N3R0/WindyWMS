@@ -34,7 +34,7 @@ export function ShipmentsTable() {
   }
 
   return (
-    <div className="rounded-md border border-white/8 overflow-hidden bg-white/2">
+    <div className="border border-white/8 overflow-hidden bg-white/2">
       {/* Nagłówek — ten sam grid co wiersze */}
       <div className={`grid ${GRID_COLS} gap-4 px-4 py-3 bg-white/3 border-b border-white/8`}>
         <div className="text-sm font-semibold text-white/70">Numer Trackingowy</div>
