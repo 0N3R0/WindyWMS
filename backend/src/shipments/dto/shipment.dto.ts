@@ -19,6 +19,9 @@ export class ShipmentResponseDto {
 
   @ApiProperty()
   createdAt: Date;
+
+  @ApiProperty()
+  updatedAt: Date;
 }
 
 export class PaginationMetaDto {

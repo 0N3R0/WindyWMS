@@ -6,7 +6,7 @@ export const SHIPMENT_CONSTANTS = {
   availableStatuses: Object.values(ShipmentStatus),
 
   sorting: {
-    allowedFields: ['createdAt', 'weight', 'recipient', 'status', 'trackingNumber'],
+    allowedFields: ['createdAt', 'updatedAt', 'weight', 'recipient', 'status', 'trackingNumber'],
     defaultField: 'createdAt',
     availableOrders: ['asc', 'desc'],
     defaultOrder: 'desc'

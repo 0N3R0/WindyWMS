@@ -5,6 +5,8 @@ export interface Shipment {
   recipient: string;
   weight: number;
   status: ShipmentStatus;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ShipmentMetadata {

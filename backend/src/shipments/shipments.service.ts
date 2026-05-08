@@ -47,6 +47,7 @@ export class ShipmentsService {
           weight: true,
           status: true,
           createdAt: true,
+          updatedAt: true
         }
       }),
       this.prisma.shipment.count({ where })
