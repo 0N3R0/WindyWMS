@@ -1,17 +1,25 @@
-"use client";
-
-import { useShipments } from "../hooks/use-shipments";
-import { Loader2, Package, ChevronDown } from "lucide-react";
+import { Loader2, Package } from "lucide-react";
 import { ShipmentRow } from "./shipment-row";
+import { AllShipments } from "../types/shipments.types";
 
-// Współdzielona definicja kolumn — gwarantuje wyrównanie nagłówka z wierszami.
-// Nagłówek i ShipmentRow importują tę samą stałą — zmiana w jednym miejscu
-// automatycznie aktualizuje oba.
-export const GRID_COLS = "grid-cols-[1fr_1fr_100px_120px_40px]";
+// Shared grid definition — aligns header with rows
+export const GRID_COLS = "grid-cols-[1fr_1fr_100px_120px_140px_40px]";
 
-export function ShipmentsTable() {
-  const { shipments, isLoading, isError, refresh } = useShipments();
+interface ShipmentsTableProps {
+  shipments: AllShipments | undefined;
+  isLoading: boolean;
+  isPageTransitioning: boolean;
+  isError: boolean;
+  onMutate: () => void;
+}
 
+export function ShipmentsTable({
+  shipments,
+  isLoading,
+  isPageTransitioning,
+  isError,
+  onMutate,
+}: ShipmentsTableProps) {
   if (isLoading) {
     return (
       <div className="flex h-48 items-center justify-center">
@@ -35,21 +43,22 @@ export function ShipmentsTable() {
 
   return (
     <div className="border border-white/8 overflow-hidden bg-white/2">
-      {/* Nagłówek — ten sam grid co wiersze */}
+      {/* Column headers */}
       <div className={`grid ${GRID_COLS} gap-4 px-4 py-3 bg-white/3 border-b border-white/8`}>
         <div className="text-sm font-semibold text-white/70">Numer Trackingowy</div>
         <div className="text-sm font-semibold text-white/70">Odbiorca</div>
         <div className="text-sm font-semibold text-right text-white/70">Waga (kg)</div>
         <div className="text-sm font-semibold text-right text-white/70">Status</div>
+        <div className="text-sm font-semibold text-right text-white/70">Zaktualizowano</div>
       </div>
 
-      {/* Ciało — lista wierszy */}
-      <div>
+      {/* Data rows — subtle opacity during page transition */}
+      <div className={`transition-opacity duration-200 ${isPageTransitioning ? "opacity-60" : ""}`}>
         {shipments?.data.map((shipment) => (
           <ShipmentRow
             key={shipment.trackingNumber}
             shipment={shipment}
-            onMutate={refresh}
+            onMutate={onMutate}
           />
         ))}
       </div>

@@ -1,9 +1,10 @@
 import { apiClient } from "@/shared/api/api-client";
-import { AllShipments, Shipment, ShipmentDetails } from "../types/shipments.types";
+import { AllShipments, Shipment, ShipmentDetails, ShipmentQueryParams } from "../types/shipments.types";
+
 
 export const shipmentsService = {
-  async getAll(): Promise<AllShipments> {
-    const response = await apiClient.get<AllShipments>('/shipments');
+  async getAll(params?: ShipmentQueryParams): Promise<AllShipments> {
+    const response = await apiClient.get<AllShipments>('/shipments', { params });
     return response.data;
   },
 

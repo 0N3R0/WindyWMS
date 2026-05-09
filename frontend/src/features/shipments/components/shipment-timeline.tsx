@@ -1,7 +1,8 @@
 "use client";
 
 import { ShipmentEvent, ShipmentStatus } from "../types/shipments.types";
-import { Package, Truck, CheckCircle2, XCircle, Clock } from "lucide-react";
+import { Truck, CheckCircle2, XCircle, Clock } from "lucide-react";
+import { formatDate } from '../../../lib/utils';
 
 interface ShipmentTimelineProps {
   events: ShipmentEvent[];
@@ -91,13 +92,7 @@ export function ShipmentTimeline({ events, currentStatus }: ShipmentTimelineProp
                 </span>
               )}
               <span className="text-xs text-muted-foreground/60">
-                {new Date(event.createdAt).toLocaleString("pl-PL", {
-                  day: "2-digit",
-                  month: "long",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {formatDate(event.createdAt, { month: 'long' })}
               </span>
             </div>
           </div>

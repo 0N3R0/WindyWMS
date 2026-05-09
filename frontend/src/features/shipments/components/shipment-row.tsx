@@ -10,8 +10,9 @@ import { ConfirmDialog } from "./confirm-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { GRID_COLS } from "./shipments-table";
 import { ChevronDown, Ban, Trash2, Loader2 } from "lucide-react";
+import { GRID_COLS } from "./shipments-table";
+import { formatDate } from "../../../lib/utils";
 
 interface ShipmentRowProps {
   shipment: Shipment;
@@ -98,6 +99,9 @@ export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
           <Badge variant={statusConfig[shipment.status].variant}>
             {statusConfig[shipment.status].label}
           </Badge>
+        </div>
+        <div className="text-sm text-right text-white/60">
+          {formatDate(shipment.updatedAt)}
         </div>
         <div className="flex justify-center">
           <ChevronDown

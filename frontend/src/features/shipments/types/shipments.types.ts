@@ -1,5 +1,11 @@
 export type ShipmentStatus = 'PENDING' | 'IN_TRANSIT' | 'DELIVERED' | 'CANCELLED';
 
+export interface ShipmentQueryParams {
+  page?: number;
+  limit?: number;
+  // Future-proof: tu dodasz later search, status, sortBy, order, minWeight, maxWeight
+}
+
 export interface Shipment {
   trackingNumber: string;
   recipient: string;
