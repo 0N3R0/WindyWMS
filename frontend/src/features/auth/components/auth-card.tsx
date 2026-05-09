@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LoginForm } from "./login-form";
-import { RegisterForm } from "./register-form";
+import { AuthForm } from "./auth-form";
 import { useState } from "react";
 
 export function AuthCard() {
@@ -58,13 +56,14 @@ export function AuthCard() {
           className="flex w-[200%] transition-transform duration-500 ease-in-out"
           style={{ transform: isLoginView ? "translateX(0)" : "translateX(-50%)" }}
         >
+
           {/* Login — 50% kontenera = 100% karty */}
           <div className="w-1/2 p-8">
-            <LoginForm />
+            <AuthForm mode="login" />
           </div>
           {/* Register — 50% kontenera = 100% karty */}
           <div className="w-1/2 p-8">
-            <RegisterForm />
+            <AuthForm mode="register" />
           </div>
         </div>
       </div>

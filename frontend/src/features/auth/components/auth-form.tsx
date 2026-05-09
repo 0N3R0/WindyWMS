@@ -11,9 +11,15 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-export function RegisterForm() {
-  const { register, isLoading, error } = useAuth();
+interface AuthFormProps {
+  mode: "login" | "register";
+}
+
+export function AuthForm({ mode }: AuthFormProps) {
+  const { login, register, isLoading, error } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
+
+  const isLogin = mode === "login";
 
   const form = useForm<AuthFormValues>({
     // @ts-expect-error — Zod v4 kompatybilny w runtime, typy jeszcze nie zaktualizowane
@@ -21,15 +27,17 @@ export function RegisterForm() {
     defaultValues: { email: "", password: "" },
   });
 
+  const onSubmit = form.handleSubmit(isLogin ? login : register);
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(register)} className="space-y-5">
+      <form onSubmit={onSubmit} className="space-y-5">
         <div className="space-y-2 text-center mb-6">
           <h2 className="font-heading text-2xl font-bold text-violet-300">
-            Utwórz konto
+            {isLogin ? "Witaj ponownie" : "Utwórz konto"}
           </h2>
           <p className="text-sm text-violet-300/60">
-            Zarejestruj się jako dyspozytor w WindyWMS
+            {isLogin ? "Wprowadź email i hasło do systemu WindyWMS" : "Zarejestruj się jako dyspozytor w WindyWMS"}
           </p>
         </div>
 
@@ -88,7 +96,9 @@ export function RegisterForm() {
           className="w-full bg-violet-600 hover:bg-violet-500 text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]"
           disabled={isLoading}
         >
-          {isLoading ? "Tworzenie konta..." : "Zarejestruj się"}
+          {isLoading
+            ? (isLogin ? "Logowanie..." : "Tworzenie konta...")
+            : (isLogin ? "Zaloguj się" : "Zarejestruj się")}
         </Button>
       </form>
     </Form>
