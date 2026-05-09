@@ -2,9 +2,7 @@ import { useState, useCallback, useMemo } from 'react';
 import useSWR from 'swr';
 import { AllShipments, ShipmentQueryParams } from '../types/shipments.types';
 import { shipmentsService } from '../services/shipments.service';
-
-const REFRESH_INTERVAL_MS = 15_000;
-const DEFAULT_PAGE_SIZE = 10;
+import { SWR_POLLING_CONFIG, DEFAULT_PAGE_SIZE } from '@/shared/config/swr.config';
 
 export function useShipments() {
   const [page, setPage] = useState(1);
@@ -28,13 +26,7 @@ export function useShipments() {
   const { data, error, isLoading, isValidating, mutate } = useSWR<AllShipments>(
     swrKey,
     () => shipmentsService.getAll(queryParams),
-    {
-      refreshInterval: REFRESH_INTERVAL_MS,
-      dedupingInterval: REFRESH_INTERVAL_MS,
-      revalidateOnFocus: true,
-      focusThrottleInterval: REFRESH_INTERVAL_MS,
-      keepPreviousData: true, // Smooth transitions — old data shown while loading new page
-    }
+    SWR_POLLING_CONFIG,
   );
 
   const goToPage = useCallback((newPage: number) => {

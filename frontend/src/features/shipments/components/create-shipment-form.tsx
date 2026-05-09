@@ -7,12 +7,31 @@ import { createShipmentSchema, CreateShipmentValues } from "../validators/shipme
 import { shipmentsService } from "../services/shipments.service";
 import { useShipments } from "../hooks/use-shipments";
 import { useConstants } from "@/shared/hooks/use-constants";
+import { getApiErrorMessage } from "@/shared/utils/api-error";
 
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Plus, Loader2 } from "lucide-react";
+
+/**
+ Validates and formats weight input:
+ - Max 2 decimal places
+ - No leading zeros (except "0.")
+ - Returns the sanitized string value and parsed number (or undefined).
+*/
+function parseWeightInput(raw: string): { display: string; value: number | undefined } | null {
+  // Reject invalid format
+  if (raw !== "" && !/^\d*\.?\d{0,2}$/.test(raw)) return null;
+  if (raw.length > 1 && raw.startsWith("0") && !raw.startsWith("0.")) return null;
+
+  const parsed = parseFloat(raw);
+  return {
+    display: raw,
+    value: raw === "" ? undefined : isNaN(parsed) ? undefined : parsed,
+  };
+}
 
 export function CreateShipmentForm() {
   const { constants } = useConstants();
@@ -49,7 +68,7 @@ export function CreateShipmentForm() {
       refresh();
       setTimeout(() => setSuccess(false), 3000);
     } catch (err: any) {
-      setError(err.response?.data?.message || "Błąd tworzenia przesyłki");
+      setError(getApiErrorMessage(err, "Błąd tworzenia przesyłki"));
     } finally {
       setIsLoading(false);
     }
@@ -100,15 +119,11 @@ export function CreateShipmentForm() {
                       onBlur={field.onBlur}
                       value={currentWeight}
                       onChange={(e) => {
-                        const raw = e.target.value;
+                        const result = parseWeightInput(e.target.value);
+                        if (!result) return;
 
-                        // Walidacja formatu: max 2 miejsca po przecinku, bez wiodących zer
-                        if (raw !== "" && !/^\d*\.?\d{0,2}$/.test(raw)) return;
-                        if (raw.length > 1 && raw.startsWith("0") && !raw.startsWith("0.")) return;
-
-                        setCurrentWeight(raw);
-                        const parsed = parseFloat(raw);
-                        field.onChange(raw === "" ? undefined : isNaN(parsed) ? undefined : parsed);
+                        setCurrentWeight(result.display);
+                        field.onChange(result.value);
                       }}
                       disabled={isLoading}
                     />

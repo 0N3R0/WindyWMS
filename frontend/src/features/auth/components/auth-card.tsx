@@ -1,17 +1,18 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { AuthForm } from "./auth-form";
 import { useState } from "react";
 
 export function AuthCard() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isLoginView, setIsLoginView] = useState(pathname === "/login");
 
   const handleSwitch = (view: "login" | "register") => {
     setIsLoginView(view === "login");
-    window.history.pushState(null, "", `/${view}`);
+    router.push(`/${view}`, { scroll: false });
   };
 
   const TABS = [

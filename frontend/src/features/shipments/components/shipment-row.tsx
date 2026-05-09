@@ -6,13 +6,14 @@ import useSWR from "swr";
 import { Shipment, ShipmentDetails, ShipmentStatus } from "../types/shipments.types";
 import { shipmentsService } from "../services/shipments.service";
 import { ShipmentTimeline } from "./shipment-timeline";
-import { ConfirmDialog } from "./confirm-dialog";
+import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ChevronDown, Ban, Trash2, Loader2 } from "lucide-react";
 import { GRID_COLS } from "./shipments-table";
-import { formatDate } from "../../../lib/utils";
+import { SWR_ON_DEMAND_CONFIG } from "@/shared/config/swr.config";
+import { formatDate } from "@/lib/utils";
 
 interface ShipmentRowProps {
   shipment: Shipment;
@@ -29,27 +30,13 @@ const statusConfig: Record<ShipmentStatus, { label: string; variant: "default" |
 export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isActioning, setIsActioning] = useState(false);
-  const prevStatusRef = useRef(shipment.status);
 
   // Fetch details only when the panel is expanded (conditional fetching)
   const { data: details, mutate: refreshDetails } = useSWR<ShipmentDetails>(
-    isOpen ? `/shipments/${shipment.trackingNumber}` : null,
+    isOpen ? `/shipments/${shipment.trackingNumber}?status=${shipment.status}` : null,
     () => shipmentsService.getDetails(shipment.trackingNumber),
-    {
-      dedupingInterval: 15_000,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      keepPreviousData: true
-    }
+    SWR_ON_DEMAND_CONFIG,
   );
-
-  // Gdy lista nadrzędna (polling 15s) wykryje zmianę statusu, odświeżamy timeline
-  useEffect(() => {
-    if (prevStatusRef.current !== shipment.status && isOpen) {
-      refreshDetails();
-    }
-    prevStatusRef.current = shipment.status;
-  }, [shipment.status, isOpen, refreshDetails]);
 
   const canCancel = shipment.status === "PENDING";
   const canDelete = shipment.status === "CANCELLED" || shipment.status === "DELIVERED";
