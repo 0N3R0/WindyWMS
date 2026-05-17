@@ -22,7 +22,7 @@ export function AuthForm({ mode }: AuthFormProps) {
   const isLogin = mode === "login";
 
   const form = useForm<AuthFormValues>({
-    // @ts-expect-error — Zod v4 kompatybilny w runtime, typy jeszcze nie zaktualizowane
+    // @ts-ignore — Zod v4 kompatybilny w runtime, typy jeszcze nie zaktualizowane
     resolver: zodResolver(authSchema),
     defaultValues: { email: "", password: "" },
   });

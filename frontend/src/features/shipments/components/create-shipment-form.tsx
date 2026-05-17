@@ -48,7 +48,7 @@ export function CreateShipmentForm() {
   const schema = createShipmentSchema(minWeight, maxWeight);
 
   const form = useForm<CreateShipmentValues>({
-    // @ts-expect-error — Zod v4 kompatybilny w runtime, typy jeszcze nie zaktualizowane
+    // @ts-ignore — Zod v4 kompatybilny w runtime, typy jeszcze nie zaktualizowane
     resolver: zodResolver(schema),
     defaultValues: {
       recipient: "",

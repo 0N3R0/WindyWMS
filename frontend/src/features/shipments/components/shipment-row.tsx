@@ -70,7 +70,7 @@ export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
     <div className="border-b last:border-b-0">
       {/* Wiersz danych — ten sam grid co nagłówek */}
       <div
-        className={`grid ${GRID_COLS} gap-4 px-4 py-3 cursor-pointer hover:bg-white/5 transition-colors items-center text-white/90`}
+        className={`grid ${GRID_COLS} gap-4 px-4 py-3 cursor-pointer hover:bg-white/5 duration-100 transition-colors items-center text-white/90`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="font-medium font-mono text-sm truncate">
