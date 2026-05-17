@@ -7,7 +7,7 @@ import { SWR_POLLING_CONFIG, DEFAULT_PAGE_SIZE } from '@/shared/config/swr.confi
 export function useShipments() {
   const [page, setPage] = useState(1);
 
-  // SWR key contains query params — page change = new cache entry
+  // SWR key contains query params - page change = new cache entry
   const queryParams: ShipmentQueryParams = useMemo(
     () => ({ page, limit: DEFAULT_PAGE_SIZE }),
     [page]

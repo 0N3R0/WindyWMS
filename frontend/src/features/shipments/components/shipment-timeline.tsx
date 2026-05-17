@@ -11,7 +11,7 @@ interface ShipmentTimelineProps {
 }
 
 export function ShipmentTimeline({ events, currentStatus }: ShipmentTimelineProps) {
-  // Memoized chronological sort — recalculates only when events change
+  // Memoized chronological sort - recalculates only when events change
   const sortedEvents = useMemo(
     () => [...events].sort(
       (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()

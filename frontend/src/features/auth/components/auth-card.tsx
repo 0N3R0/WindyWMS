@@ -52,17 +52,17 @@ export function AuthCard() {
         {/* Gradient line na górze */}
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-violet-500/40 to-transparent" />
 
-        {/* Sliding container — 200% szerokości karty */}
+        {/* Sliding container - 200% szerokości karty */}
         <div
           className="flex w-[200%] transition-transform duration-500 ease-in-out"
           style={{ transform: isLoginView ? "translateX(0)" : "translateX(-50%)" }}
         >
 
-          {/* Login — 50% kontenera = 100% karty */}
+          {/* Login - 50% kontenera = 100% karty */}
           <div className="w-1/2 p-8">
             <AuthForm mode="login" />
           </div>
-          {/* Register — 50% kontenera = 100% karty */}
+          {/* Register - 50% kontenera = 100% karty */}
           <div className="w-1/2 p-8">
             <AuthForm mode="register" />
           </div>

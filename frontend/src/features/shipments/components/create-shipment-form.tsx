@@ -40,7 +40,7 @@ export function CreateShipmentForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  // Dynamiczny schemat — limity wagi z backendu, fallback na domyślne
+  // Dynamiczny schemat - limity wagi z backendu, fallback na domyślne
   const minWeight = constants?.shipments.minWeight ?? 0.1;
   const maxWeight = constants?.shipments.maxWeight ?? 1000;
   const [currentWeight, setCurrentWeight] = useState('');
@@ -48,7 +48,7 @@ export function CreateShipmentForm() {
   const schema = createShipmentSchema(minWeight, maxWeight);
 
   const form = useForm<CreateShipmentValues>({
-    // @ts-ignore — Zod v4 kompatybilny w runtime, typy jeszcze nie zaktualizowane
+    // @ts-ignore - Zod v4 kompatybilny w runtime, typy jeszcze nie zaktualizowane
     resolver: zodResolver(schema),
     defaultValues: {
       recipient: "",

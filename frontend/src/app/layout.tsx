@@ -14,7 +14,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "WindyWMS — System Zarządzania Magazynem",
+  title: "WindyWMS - System Zarządzania Magazynem",
   description: "Profesjonalny system zarządzania przesyłkami i logistyką magazynową.",
 };
 

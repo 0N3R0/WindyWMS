@@ -2,10 +2,10 @@ import { Loader2, Package } from "lucide-react";
 import { ShipmentRow } from "./shipment-row";
 import { AllShipments } from "../types/shipments.types";
 
-// Shared grid definition — aligns header with rows
+// Shared grid definition - aligns header with rows
 export const GRID_COLS = "grid-cols-[1fr_1fr_100px_120px_140px_40px]";
 
-// Table column definitions — single source of truth for headers
+// Table column definitions - single source of truth for headers
 const TABLE_COLUMNS = [
   { label: "Numer Trackingowy", align: "text-left" },
   { label: "Odbiorca", align: "text-left" },
@@ -61,7 +61,7 @@ export function ShipmentsTable({
         ))}
       </div>
 
-      {/* Data rows — subtle opacity during page transition */}
+      {/* Data rows - subtle opacity during page transition */}
       <div className={`transition-opacity duration-200 ${isPageTransitioning ? "opacity-60" : ""}`}>
         {shipments?.data.map((shipment) => (
           <ShipmentRow

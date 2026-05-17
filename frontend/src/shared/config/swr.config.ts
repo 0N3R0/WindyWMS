@@ -20,7 +20,7 @@ export const SWR_POLLING_CONFIG: SWRConfiguration = {
 
 /**
  * Shared SWR configuration for on-demand fetches (expanded panels, modals).
- * No automatic polling — data is fetched once and deduped.
+ * No automatic polling - data is fetched once and deduped.
  */
 export const SWR_ON_DEMAND_CONFIG: SWRConfiguration = {
   dedupingInterval: SWR_REFRESH_INTERVAL_MS,

@@ -1,7 +1,7 @@
 export function AuthBackground() {
   return (
     <div className="hidden lg:flex flex-1 items-center justify-center relative group/brand cursor-default select-none">
-      {/* Siatka logistyczna — subtelny drift animation */}
+      {/* Siatka logistyczna - subtelny drift animation */}
       <div
         className="absolute inset-0 opacity-[0.04] animate-grid-drift"
         style={{
@@ -13,7 +13,7 @@ export function AuthBackground() {
         }}
       />
 
-      {/* Gradient glow — powiększa się on hover */}
+      {/* Gradient glow - powiększa się on hover */}
       <div className="absolute w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[120px] transition-all duration-700 ease-out group-hover/brand:w-[600px] group-hover/brand:h-[600px] group-hover/brand:bg-violet-500/15" />
 
       {/* Dekoracyjne kółka/particles */}
@@ -30,7 +30,7 @@ export function AuthBackground() {
 
       {/* Logo i nazwa */}
       <div className="relative z-10 text-center space-y-6 transition-transform duration-500 group-hover/brand:-translate-y-2">
-        {/* Ikona — pulsująca obwódka + float */}
+        {/* Ikona - pulsująca obwódka + float */}
         <div className="mx-auto w-24 h-24 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center backdrop-blur-sm animate-pulse-ring transition-all duration-500 group-hover/brand:bg-violet-500/15 group-hover/brand:border-violet-500/35 group-hover/brand:scale-110 group-hover/brand:-translate-y-3">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-violet-300 transition-colors duration-500 group-hover/brand:text-violet-400">
             <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />

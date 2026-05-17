@@ -68,7 +68,7 @@ export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
 
   return (
     <div className="border-b last:border-b-0">
-      {/* Wiersz danych — ten sam grid co nagłówek */}
+      {/* Wiersz danych - ten sam grid co nagłówek */}
       <div
         className={`grid ${GRID_COLS} gap-4 px-4 py-3 cursor-pointer hover:bg-white/5 duration-100 transition-colors items-center text-white/90`}
         onClick={() => setIsOpen(!isOpen)}
@@ -97,7 +97,7 @@ export function ShipmentRow({ shipment, onMutate }: ShipmentRowProps) {
         </div>
       </div>
 
-      {/* Rozwijany panel — animacja grid-template-rows na ZWYKŁYM DIVIE */}
+      {/* Rozwijany panel - animacja grid-template-rows na ZWYKŁYM DIVIE */}
       <div
         className="grid transition-[grid-template-rows] duration-300 ease-in-out"
         style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
